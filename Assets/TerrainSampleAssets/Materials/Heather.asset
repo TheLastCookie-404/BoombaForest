@@ -48,9 +48,9 @@ Material:
   - TransparentDepthPrepass
   - TransparentDepthPostpass
   - TransparentBackface
-  - RayTracingPrepass
-  - ForwardEmissiveForDeferred
   - MOTIONVECTORS
+  - ForwardEmissiveForDeferred
+  - RayTracingPrepass
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
