@@ -160,9 +160,9 @@
       }
     },
     "com.unity.render-pipelines.high-definition-config": {
-      "version": "file:com.unity.render-pipelines.high-definition-config",
-      "depth": 0,
-      "source": "embedded",
+      "version": "15.0.6",
+      "depth": 1,
+      "source": "builtin",
       "dependencies": {
         "com.unity.render-pipelines.core": "15.0.6"
       }
