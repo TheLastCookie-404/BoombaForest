@@ -26,7 +26,7 @@ MonoBehaviour:
     m_Count: 6
     preserveAspectRatio: 0
     rotation: 0
-    tint: {r: 1, g: 0.8118136, b: 0.5330188, a: 0.5}
+    tint: {r: 1, g: 1, b: 1, a: 0.23529412}
     blendMode: 0
     autoRotate: 0
     flareType: 1
@@ -144,11 +144,11 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     distortionRelativeToCenter: 1
-    m_FallOff: 1
-    m_EdgeOffset: 0.141
+    m_FallOff: 0.311
+    m_EdgeOffset: 1
     m_SideCount: 6
     m_SdfRoundness: 0
-    inverseSDF: 0
+    inverseSDF: 1
     uniformAngle: 0
     uniformAngleCurve:
       serializedVersion: 2

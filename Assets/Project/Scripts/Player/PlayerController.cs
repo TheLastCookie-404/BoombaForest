@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
         PlayerRotate(_rotateInput.x);
         CamRotate(_rotateInput.y);
         SquatCollider(_isSquat);
-        IsGrounded();
+        //IsGrounded();
     }
 
     private void GetInput()

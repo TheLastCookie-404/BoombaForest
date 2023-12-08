@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class LightSwitch : MonoBehaviour, IInteractable
 {
     public Light m_Light;
+    public LensFlareComponentSRP m_LenseFlare;
     public bool isOn;
 
     // Start is called before the first frame update
