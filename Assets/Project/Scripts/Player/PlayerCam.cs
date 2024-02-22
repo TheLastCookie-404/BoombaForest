@@ -34,8 +34,8 @@ public class PlayerCam : MonoBehaviour
 
     void Start()
     {
-        _playerController = FindObjectOfType<PlayerController>();
-        _playerInteraction = FindObjectOfType<PlayerInteraction>();
+        _playerController = FindAnyObjectByType<PlayerController>();
+        _playerInteraction = FindAnyObjectByType<PlayerInteraction>();
         _camDeffaultPos = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z); // Начальная позиция камеры
         _camPos = _camDeffaultPos;
     }
