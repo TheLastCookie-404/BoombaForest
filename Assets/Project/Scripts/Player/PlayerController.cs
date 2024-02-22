@@ -6,15 +6,15 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Обрезка угла наклона камеры")]
-    [SerializeField, Tooltip("Максимальный угол поворота камеры"), Range(70, 90)] private int _maxAngle; 
+    [SerializeField, Tooltip("Максимальный угол поворота камеры"), Range(70, 90)] private int _maxAngle;
     [SerializeField, Tooltip("Минимальный угол поворота камеры"), Range(70, 90)] private int _minAngle;
 
     [Header("Чувствительность")]
     [SerializeField, Tooltip("Чувствительность мыши"), Range(1, 900)] private int _turnSpeed;
 
     [Header("Скорость")]
-    [SerializeField, Tooltip("Скорость персонажа по умолчанию"), Range(1f, 10f)] private float _defaultSpeed; 
-    [SerializeField, Tooltip("Скорость спринта персонажа"), Range(1f, 20f)] private float _sprintSpeed; 
+    [SerializeField, Tooltip("Скорость персонажа по умолчанию"), Range(1f, 10f)] private float _defaultSpeed;
+    [SerializeField, Tooltip("Скорость спринта персонажа"), Range(1f, 20f)] private float _sprintSpeed;
     [SerializeField, Tooltip("Ускорение персонажа"), Range(1f, 40f)] private float _accelerationSpeed;
 
     [Header("Коллайдер")]
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _move;
     private Vector3 _defaultColliderPos;
     private Vector3 _squatColliderPos;
-    private Vector3 _rayOrigin; 
+    private Vector3 _rayOrigin;
 
     private float _characterSpeed;
     private float _camRotation;
@@ -45,11 +45,13 @@ public class PlayerController : MonoBehaviour
     private float _time;
     private bool _isSquat;
     private bool _isSprint;
+    private bool _isJump;
     private bool _isRayHit;
     private bool _isInteract;
 
     private const float _GravityStrenght = 9.87f;
     private const int _CollPosDivider = 2;
+    private int _characterWeight = 75;
 
     public float VerticalInput { get => _moveInput.y; }
     public float HorizontalInput { get => _moveInput.x; }
@@ -66,7 +68,7 @@ public class PlayerController : MonoBehaviour
     {
         _characterController = GetComponent<CharacterController>();
         _camera = GetComponentInChildren<Camera>();
-        _audioManager = FindObjectOfType<AudioManager>();
+        _audioManager = FindAnyObjectByType<AudioManager>();
         _defaultColliderPos = new Vector3(0, 0, 0);
         _squatColliderPos = new Vector3(0, -(_defaultColliderHeight - _squatColliderHeight) / _CollPosDivider, 0);
     }
@@ -78,6 +80,7 @@ public class PlayerController : MonoBehaviour
         SpeedRegulate();
         PlayerMove(_moveInput);
         PlayerRotate(_rotateInput.x);
+        PlayerJump(_isJump);
         CamRotate(_rotateInput.y);
         SquatCollider(_isSquat);
         //IsGrounded();
@@ -85,11 +88,13 @@ public class PlayerController : MonoBehaviour
 
     private void GetInput()
     {
-        _moveInput = _playerControls.Player.Move.ReadValue<Vector2>() * _characterSpeed * Time.deltaTime; 
+        _moveInput = _playerControls.Player.Move.ReadValue<Vector2>() * _characterSpeed * Time.deltaTime;
         _rotateInput = _playerControls.Player.Rotate.ReadValue<Vector2>() * _turnSpeed * Time.deltaTime;
         _isInteract = _playerControls.Player.ObjInteraction.WasPressedThisFrame();
         _isSquat = _playerControls.Player.Squat.IsPressed() || _isRayHit;
         _isSprint = _playerControls.Player.Sprint.IsPressed() && !_isSquat;
+        _isJump = _playerControls.Player.Jump.WasPressedThisFrame() || _isRayHit;
+        Debug.Log(_isJump);
         /*_isSquat = _playerControls.Player.Squat.IsPressed() || _isRayHit;*/
     }
 
@@ -99,7 +104,15 @@ public class PlayerController : MonoBehaviour
         _moveX = Mathf.Lerp(_moveX, moveInput.x, Time.deltaTime * _accelerationSpeed);
         _move = ((_moveY * transform.forward) + (_moveX * transform.right)); // Вектор движения
         _characterController.Move(_move); // Движение в пространствве
-        _characterController.SimpleMove(Vector3.down * _GravityStrenght); // Гравитация
+        _characterController.SimpleMove(Vector3.down * _GravityStrenght * _characterWeight); // Гравитация
+    }
+
+    private void PlayerJump(bool isJumpPressed)
+    {
+        if(isJumpPressed) 
+        {
+            _characterController.Move(Vector3.up * 1000 * Time.deltaTime);
+        }
     }
 
     private void PlayerRotate(float inputValue) => transform.Rotate(Vector3.up * inputValue); // Ротация игрока по горизонтали
@@ -115,7 +128,7 @@ public class PlayerController : MonoBehaviour
 
     private void SpeedRegulate()
     {
-        if (_isSquat) _characterSpeed = _defaultSpeed / _squatSlowdown; // Замедление при приседании
+        /*if (_isSquat) _characterSpeed = _defaultSpeed / _squatSlowdown; // Замедление при приседании
         else _characterSpeed = SprintActivationDelay(_isSprint, 1f, ref _time) ? _sprintSpeed : _defaultSpeed;
 
 
@@ -131,9 +144,9 @@ public class PlayerController : MonoBehaviour
                 return false;
             }
             return false;
-        }
-        /*if (_isSquat) _characterSpeed = _defaultSpeed / _squatSlowdown; // Замедление при приседании
-        else _characterSpeed = _isSprint ? _sprintSpeed : _defaultSpeed;*/
+        }*/
+        if (_isSquat) _characterSpeed = _defaultSpeed / _squatSlowdown; // Замедление при приседании
+        else _characterSpeed = _isSprint ? _sprintSpeed : _defaultSpeed;
     }
     private void SquatCollider(bool toggleVal) // Поведение коллайдера в приседе
     {

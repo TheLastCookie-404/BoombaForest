@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 7091.083, g: 4560.1978, b: 2971.2034, a: 1}
+  m_IndirectSpecularColor: {r: 1270.2736, g: 606.877, b: 186.2754, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1963,13 +1963,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1324860287}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.9145366, y: 0, z: 0, w: 0.40450326}
+  m_LocalRotation: {x: 0.99976206, y: 0, z: 0, w: 0.021814989}
   m_LocalPosition: {x: 0, y: 130, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 132.28, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 177.5, y: 0, z: 0}
 --- !u!114 &1324860291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2373,7 +2373,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1475609309}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 511.97607, y: 10.925007, z: 612.39404}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2917,12 +2917,12 @@ PrefabInstance:
     - target: {fileID: 209606382472398822, guid: 8405e757298c5c5429ae3bc804351238,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 106.19
+      value: 101.22
       objectReference: {fileID: 0}
     - target: {fileID: 209606382472398822, guid: 8405e757298c5c5429ae3bc804351238,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 136.7
+      value: 120.79
       objectReference: {fileID: 0}
     - target: {fileID: 209606382472398822, guid: 8405e757298c5c5429ae3bc804351238,
         type: 3}
@@ -3112,7 +3112,7 @@ PrefabInstance:
     - target: {fileID: 6578897235902660116, guid: 8405e757298c5c5429ae3bc804351238,
         type: 3}
       propertyPath: _turnSpeed
-      value: 1
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6578897235902660116, guid: 8405e757298c5c5429ae3bc804351238,
         type: 3}
@@ -3122,7 +3122,7 @@ PrefabInstance:
     - target: {fileID: 6578897235902660116, guid: 8405e757298c5c5429ae3bc804351238,
         type: 3}
       propertyPath: _sprintSpeed
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6578897235902660116, guid: 8405e757298c5c5429ae3bc804351238,
         type: 3}
