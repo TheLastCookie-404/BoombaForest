@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1270.2736, g: 606.877, b: 186.2754, a: 1}
+  m_IndirectSpecularColor: {r: 1270.3854, g: 606.9283, b: 186.30885, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3047,7 +3047,7 @@ PrefabInstance:
     - target: {fileID: 3863636410943592536, guid: 8405e757298c5c5429ae3bc804351238,
         type: 3}
       propertyPath: m_Volume
-      value: 0.805
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3863636410943592536, guid: 8405e757298c5c5429ae3bc804351238,
         type: 3}
@@ -3067,7 +3067,7 @@ PrefabInstance:
     - target: {fileID: 3863636410943592536, guid: 8405e757298c5c5429ae3bc804351238,
         type: 3}
       propertyPath: m_PlayOnAwake
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4040764533078920300, guid: 8405e757298c5c5429ae3bc804351238,
         type: 3}
@@ -3107,6 +3107,11 @@ PrefabInstance:
     - target: {fileID: 6552582156727647937, guid: 8405e757298c5c5429ae3bc804351238,
         type: 3}
       propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552582156727647937, guid: 8405e757298c5c5429ae3bc804351238,
+        type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6578897235902660116, guid: 8405e757298c5c5429ae3bc804351238,

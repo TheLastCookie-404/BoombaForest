@@ -80,10 +80,10 @@ public class PlayerController : MonoBehaviour
         SpeedRegulate();
         PlayerMove(_moveInput);
         PlayerRotate(_rotateInput.x);
-        PlayerJump(_isJump);
+        //PlayerJump(_isJump);
         CamRotate(_rotateInput.y);
         SquatCollider(_isSquat);
-        //IsGrounded();
+        IsGrounded();
     }
 
     private void GetInput()
@@ -93,9 +93,8 @@ public class PlayerController : MonoBehaviour
         _isInteract = _playerControls.Player.ObjInteraction.WasPressedThisFrame();
         _isSquat = _playerControls.Player.Squat.IsPressed() || _isRayHit;
         _isSprint = _playerControls.Player.Sprint.IsPressed() && !_isSquat;
-        _isJump = _playerControls.Player.Jump.WasPressedThisFrame() || _isRayHit;
+        _isJump = _playerControls.Player.Jump.WasPressedThisFrame();
         Debug.Log(_isJump);
-        /*_isSquat = _playerControls.Player.Squat.IsPressed() || _isRayHit;*/
     }
 
     private void PlayerMove(Vector2 moveInput)
@@ -109,9 +108,9 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerJump(bool isJumpPressed)
     {
-        if(isJumpPressed) 
+        if(isJumpPressed && _characterController.isGrounded) 
         {
-            _characterController.Move(Vector3.up * 1000 * Time.deltaTime);
+            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, transform.position.y + 10, Time.deltaTime * 50), transform.position.z);
         }
     }
 
