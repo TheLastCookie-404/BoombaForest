@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     private bool _isRayHit;
     private bool _isInteract;
 
-    private const float _GravityStrenght = 9.87f;
+    private const float _GravityStrenght = -9.87f;
     private const int _CollPosDivider = 2;
     private int _characterWeight = 75;
 
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         _isInteract = _playerControls.Player.ObjInteraction.WasPressedThisFrame();
         _isSquat = _playerControls.Player.Squat.IsPressed() || _isRayHit;
         _isSprint = _playerControls.Player.Sprint.IsPressed() && !_isSquat;
-        _isJump = _playerControls.Player.Jump.WasPressedThisFrame();
+        _isJump = _playerControls.Player.Jump.IsPressed();
         Debug.Log(_isJump);
     }
 
@@ -101,17 +101,19 @@ public class PlayerController : MonoBehaviour
     {
         _moveY = Mathf.Lerp(_moveY, moveInput.y, Time.deltaTime * _accelerationSpeed);
         _moveX = Mathf.Lerp(_moveX, moveInput.x, Time.deltaTime * _accelerationSpeed);
-        _move = ((_moveY * transform.forward) + (_moveX * transform.right)); // Вектор движения
+        _move = ((_moveY * transform.forward) + (_moveX * transform.right) + (PlayerJump(_isJump))); // Вектор движения
         _characterController.Move(_move); // Движение в пространствве
-        _characterController.SimpleMove(Vector3.down * _GravityStrenght * _characterWeight); // Гравитация
+        /*_characterController.SimpleMove(Vector3.down * _GravityStrenght * _characterWeight);*/ // Гравитация
     }
 
-    private void PlayerJump(bool isJumpPressed)
+    private Vector3 PlayerJump(bool isJumpPressed)
     {
-        if(isJumpPressed && _characterController.isGrounded) 
+        if(isJumpPressed) 
         {
-            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, transform.position.y + 10, Time.deltaTime * 50), transform.position.z);
+            /*transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, transform.position.y + 10, Time.deltaTime * 50), transform.position.z);*/
+            return -_GravityStrenght * transform.up * Time.deltaTime;
         }
+        return _GravityStrenght * transform.up * Time.deltaTime;
     }
 
     private void PlayerRotate(float inputValue) => transform.Rotate(Vector3.up * inputValue); // Ротация игрока по горизонтали
